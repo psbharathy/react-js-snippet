@@ -1,0 +1,9 @@
+We are going to learn adding
+ Nav Layout with App
+
+Lifitin State Up
+
+Sharing State to mutliple component
+
+Sync components
+
