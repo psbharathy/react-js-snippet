@@ -7,3 +7,4 @@ Sharing State to mutliple component
 
 Sync components
 
+Stateless Functional components
