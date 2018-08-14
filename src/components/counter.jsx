@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 class Counter extends Component {
   state = {
     value: this.props.value
@@ -20,8 +21,10 @@ class Counter extends Component {
 
   render() {
     console.log("Props", this.props);
+    // Note props childern renders h4
     return (
       <div>
+        {this.props.children}
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
           onClick={() => this.handleIncrement({ id: 1 })}

@@ -10,10 +10,13 @@ class Counters extends Component {
     ]
   };
   render() {
+    // Key is special word but value is arg
     return (
       <div>
         {this.state.counters.map(counter => (
-          <Counter key={counter.id} value={counter.value} />
+          <Counter key={counter.id} value={counter.value}>
+            <h4>Counter #{counter.id}</h4>
+          </Counter>
         ))}
       </div>
     );
