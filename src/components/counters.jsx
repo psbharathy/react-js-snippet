@@ -18,6 +18,17 @@ class Counters extends Component {
     this.setState({ counters });
   };
 
+  handleIncrement = counter => {
+    console.log("Event hanlded", counter);
+    // ... is for cloning the counters
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value++;
+    this.setState({ counters });
+    console.log(this.state.counters[0]);
+  };
+
   handleDelete = counterId => {
     // console.log("Event Handled", counterId);
     const counters = this.state.counters.filter(c => c.id !== counterId);
@@ -35,6 +46,7 @@ class Counters extends Component {
           <Counter
             key={counter.id}
             onDelete={this.handleDelete}
+            onIncrement={this.handleIncrement}
             counter={counter}
           />
         ))}
