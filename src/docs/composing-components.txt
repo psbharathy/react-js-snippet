@@ -1,0 +1,13 @@
+In this Composing Components Trainig 
+
+We will learn about
+
+how to pass Data to Components
+
+Raise and Hanlde Events
+
+Mutliple Components in Sync
+
+Functional Components
+
+Life cycle Hooks
