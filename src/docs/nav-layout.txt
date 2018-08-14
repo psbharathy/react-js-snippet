@@ -10,3 +10,15 @@ Sync components
 Stateless Functional components
 
 Destructuring Arguments
+
+LifeCycle Hooks
+  1. MOUNT ing Phase
+    - constructor
+    - render
+    - componentDidMount
+
+  2. Update Phase
+    - render
+    - componentDidUpdate
+  3. Un MOUNTing Phase
+    - comoponentWillUnmount

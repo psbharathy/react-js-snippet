@@ -14,6 +14,24 @@ class App extends Component {
     ]
   };
 
+  constructor() {
+    super();
+    console.log("App -Constructor", this.props);
+    // we can set state on constructor
+    // this.state = this.props.something;
+  }
+  //  1. Mounting Constructor
+  // constructor(props) {
+  //   super(props);
+  //   console.log("App -Constructor", this.props);
+  //   // we can set state on constructor
+  //   // this.state = this.props.something;
+  // }
+  // 21. Mounting componentDidMount
+  componentDidMount() {
+    // AJAX call and set the State
+    console.log("App Mounted");
+  }
   handleReset = () => {
     const counters = this.state.counters.map(c => {
       c.value = 0;
@@ -40,6 +58,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("App- Rendered");
     return (
       <React.Fragment>
         <NavBar
