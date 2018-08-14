@@ -20,7 +20,7 @@ class Counter extends Component {
   // }; to simple experssion check OnClick
 
   render() {
-    console.log("Props", this.props);
+    // console.log("Props", this.props);
     // Note props childern renders h4
     return (
       <div>
