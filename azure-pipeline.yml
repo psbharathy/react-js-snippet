@@ -1,6 +1,5 @@
 trigger:
- - master
-environment: power-vm-poc  
+ - master  
 pool:
    vmImage: 'ubuntu-latest'
 steps: 
