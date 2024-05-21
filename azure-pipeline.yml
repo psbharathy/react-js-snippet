@@ -8,12 +8,12 @@ pool:
 
 jobs:
 - job: BuildAndDeploy
-  displayName: 'Build and Deploy Job'
+  displayName: 'Build and Deploy Power BI Job'
   pool:
     name: Default  # Ensure this matches the agent pool name
   steps:
-  - script: echo "Running on a self-hosted agent VM"
-    displayName: 'Print a message'
+  - script: echo "Running on a self-hosted agent Azure VM"
+    displayName: 'Azure Pipeline Started'
   - script: |
       echo "Building the Power BI..."
       # Add your build commands here
