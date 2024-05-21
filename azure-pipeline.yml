@@ -1,21 +1,24 @@
 trigger:
- - master  
+- main
+
 pool:
-   vmImage: 'ubuntu-latest'
-steps: 
-  - task: NodeTool@0
-    inputs:
-     versionSpec: '10.x'
-    displayName: 'Install Node.js'
+  name: Default  # The agent pool where your VM agent is registered
+  demands:
+  - agent.name -equals <YOUR-VM-AGENT-NAME>
+
+jobs:
+- job: BuildAndDeploy
+  displayName: 'Build and Deploy Job'
+  pool:
+    name: Default  # Ensure this matches the agent pool name
+  steps:
+  - script: echo "Running on a self-hosted agent VM"
+    displayName: 'Print a message'
   - script: |
-     npm install
-     npm run build
-    displayName: 'npm install and build'
-  - task: CopyFiles@2
-    inputs:
-     Contents: 'build/**' # Pull the build directory (React)
-     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: $(Build.ArtifactStagingDirectory) 
-      ArtifactName: 'www' # output artifact named www
+      echo "Building the application..."
+      # Add your build commands here
+    displayName: 'Build Step'
+  - script: |
+      echo "Deploying the application..."
+      # Add your deploy commands here
+    displayName: 'Deploy Step'
