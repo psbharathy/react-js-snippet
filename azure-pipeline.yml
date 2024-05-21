@@ -4,7 +4,7 @@ trigger:
 pool:
   name: Default  # The agent pool where your VM agent is registered
   demands:
-  - agent.name -equals <YOUR-VM-AGENT-NAME>
+  - agent.name -equals power-vm-poc
 
 jobs:
 - job: BuildAndDeploy
@@ -15,10 +15,10 @@ jobs:
   - script: echo "Running on a self-hosted agent VM"
     displayName: 'Print a message'
   - script: |
-      echo "Building the application..."
+      echo "Building the Power BI..."
       # Add your build commands here
     displayName: 'Build Step'
   - script: |
-      echo "Deploying the application..."
+      echo "Deploying the  Power BI..."
       # Add your deploy commands here
     displayName: 'Deploy Step'
