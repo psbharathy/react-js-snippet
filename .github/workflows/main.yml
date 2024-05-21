@@ -1,0 +1,36 @@
+name: Trigger Azure Pipeline
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Trigger Azure Pipeline
+      env:
+        AZURE_DEVOPS_ORG: 'power-poc'   # Your Azure DevOps organization
+        AZURE_DEVOPS_PROJECT: 'powerbi'     # Your Azure DevOps project
+        AZURE_DEVOPS_PIPELINE_ID: '1'  # Your Azure Pipeline ID
+        AZURE_DEVOPS_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
+      run: |
+        pipeline_url="https://dev.azure.com/$AZURE_DEVOPS_ORG/$AZURE_DEVOPS_PROJECT/_apis/pipelines/$AZURE_DEVOPS_PIPELINE_ID/runs?api-version=6.0-preview.1"
+        
+        echo "Triggering Azure Pipeline: $pipeline_url from GitHub Actions"
+        
+        response=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Basic $(echo -n ":$AZURE_DEVOPS_PAT" | base64)" \
+          $pipeline_url)
+
+        if [ $response -ne 201 ]; then
+          echo "Failed to trigger Azure Pipeline. HTTP status code: $response"
+          exit 1
+        else
+          echo "Successfully triggered Azure Pipeline"
+        fi
