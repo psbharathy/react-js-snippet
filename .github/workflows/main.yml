@@ -2,6 +2,7 @@ name: Trigger-Azure-Pipeline
 on:
   push:
     branches:
+      - development
       - master
 jobs:
   trigger-pipeline:
@@ -15,9 +16,15 @@ jobs:
       env:
         AZURE_DEVOPS_ORG: 'power-poc'  
         AZURE_DEVOPS_PROJECT: 'powerbi'
-        AZURE_DEVOPS_PIPELINE_ID: '2'
         AZURE_DEVOPS_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
       run: |
+        if [[ "${{ github.ref }}" == "master" ]]; then
+            AZURE_DEVOPS_PIPELINE_ID="main-branch-value"
+          elif [[ "${{ github.ref }}" == "development" ]]; then
+            AZURE_DEVOPS_PIPELINE_ID="3"
+          else
+            AZURE_DEVOPS_PIPELINE_ID="4"
+          fi
         pipeline_url="https://dev.azure.com/$AZURE_DEVOPS_ORG/$AZURE_DEVOPS_PROJECT/_apis/pipelines/$AZURE_DEVOPS_PIPELINE_ID/runs?api-version=6.0-preview.1"
         
         echo "Triggering Azure Pipeline Only Master branch: $pipeline_url from GitHub Actions"
