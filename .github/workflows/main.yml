@@ -19,7 +19,7 @@ jobs:
         AZURE_DEVOPS_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
       run: |
         if [[ "${{ github.ref }}" == "master" ]]; then
-            AZURE_DEVOPS_PIPELINE_ID="main-branch-value"
+            AZURE_DEVOPS_PIPELINE_ID="1"
           elif [[ "${{ github.ref }}" == "development" ]]; then
             AZURE_DEVOPS_PIPELINE_ID="3"
           else
