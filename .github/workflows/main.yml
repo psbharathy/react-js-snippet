@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+      - qa
+      - development
 jobs:
   trigger-pipeline:
     runs-on: ubuntu-latest
