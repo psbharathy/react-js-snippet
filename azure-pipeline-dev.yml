@@ -1,0 +1,23 @@
+trigger:
+- development
+pool:
+  name: Default  # The agent pool where your VM agent is registered
+  demands:
+  - agent.name -equals power-vm-poc
+
+jobs:
+- job: BuildAndDeploy
+  displayName: 'Development Build and Deploy Power BI Job'
+  pool:
+    name: Default  # Ensure this matches the agent pool name
+  steps:
+  - script: echo "Running on a self-hosted agent Azure VM"
+    displayName: 'Azure Pipeline Started'
+  - script: |
+      echo "Building the Power BI..."
+      # Add your build commands here
+    displayName: 'Build Step'
+  - script: |
+      echo "Deploying the  Power BI..."
+      # Add your deploy commands here
+    displayName: 'Deploy Step'
