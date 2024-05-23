@@ -8,6 +8,7 @@ on:
       - master
 jobs:
   trigger-pipeline:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
