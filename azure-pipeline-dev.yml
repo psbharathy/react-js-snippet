@@ -1,6 +1,5 @@
 trigger:
-- master
-- main
+- development
 pool:
   name: Default  # The agent pool where your VM agent is registered
   demands:
@@ -8,7 +7,7 @@ pool:
 
 jobs:
 - job: BuildAndDeploy
-  displayName: 'Build and Deploy Power BI Job'
+  displayName: 'Development Build and Deploy Power BI Job'
   pool:
     name: Default  # Ensure this matches the agent pool name
   steps:
