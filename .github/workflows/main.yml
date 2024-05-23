@@ -2,18 +2,18 @@ name: Trigger-Azure-Pipeline
 on:
   pull_request:
     types: [closed]
-  status:
     branches:
+      - qa
       - development
       - master
 jobs:
-  trigger-pipeline:
+  if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    # - name: Checkout code
+    #   uses: actions/checkout@v2
 
     - name: Trigger Azure Pipeline
       env:
@@ -31,7 +31,7 @@ jobs:
           fi
           pipeline_url="https://dev.azure.com/$AZURE_DEVOPS_ORG/$AZURE_DEVOPS_PROJECT/_apis/pipelines/$AZURE_DEVOPS_PIPELINE_ID/runs?api-version=6.0-preview.1"
           
-          echo "Triggering Azure Pipeline Only Master branch: $pipeline_url from GitHub Actions"
+          echo "invoke Azure Pipeline Only Spricific "${{ github.ref }} Branch: $pipeline_url from GitHub Actions"
           
           response=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
             -H "Content-Type: application/json" \
@@ -39,9 +39,9 @@ jobs:
             $pipeline_url)
 
           if [ $response -ne 201 ]; then
-            echo "Failed to trigger Azure Pipeline. HTTP status code: $response"
+            echo "Failed to trigger Azure Pipeline "${{ github.ref }}. HTTP status code: $response"
             exit 1
           else
-            echo "Successfully triggered Azure Pipeline $AZURE_DEVOPS_PIPELINE_ID"
+            echo "Successfully triggered Azure Pipeline "${{ github.ref }} $AZURE_DEVOPS_PIPELINE_ID"
           fi
         fi
