@@ -1,18 +1,19 @@
 name: Trigger-Azure-Pipeline
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
-      - 'qa'
-      - 'development'
-      - 'master'
+      - qa
+      - development
+      - master
 jobs:
-  trigger-pipeline:
+  if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    # - name: Checkout code
+    #   uses: actions/checkout@v2
 
     - name: Trigger Azure Pipeline
       env:
