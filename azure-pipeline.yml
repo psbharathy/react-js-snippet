@@ -1,5 +1,6 @@
 trigger:
 - master
+- main
 pool:
   name: Default  # The agent pool where your VM agent is registered
   demands:

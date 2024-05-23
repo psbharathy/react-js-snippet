@@ -1,11 +1,10 @@
 name: Trigger-Azure-Pipeline
 on:
-  pull_request:
-    types: [closed]
-  status:
+  push:
     branches:
-      - development
-      - master
+      - 'qa'
+      - 'development'
+      - 'master'
 jobs:
   trigger-pipeline:
     if: github.event.pull_request.merged == true
